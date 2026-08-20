@@ -1,0 +1,100 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMPK5f+K1kfSRtFFxq9Eje2",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/MalliChandana/ITA0517-ComputerVision/blob/main/LAB%20EXPERIMENTS/exp7\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 273
+        },
+        "id": "QfmNJbWhz5fw",
+        "outputId": "4f9fef64-bf91-40aa-ab97-7618be740f9a"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Slow-motion playback completed.\n"
+          ]
+        }
+      ],
+      "source": [
+        "import cv2\n",
+        "from google.colab import files\n",
+        "from IPython.display import display, clear_output\n",
+        "from PIL import Image\n",
+        "import time\n",
+        "\n",
+        "# Upload captured video\n",
+        "uploaded = files.upload()\n",
+        "\n",
+        "# Get the uploaded video filename\n",
+        "filename = next(iter(uploaded))\n",
+        "\n",
+        "# Open the video\n",
+        "cap = cv2.VideoCapture(filename)\n",
+        "\n",
+        "if not cap.isOpened():\n",
+        "    print(\"Error: Could not open video.\")\n",
+        "else:\n",
+        "    print(\"Video loaded successfully!\")\n",
+        "\n",
+        "    # Get video properties\n",
+        "    fps = cap.get(cv2.CAP_PROP_FPS)\n",
+        "    print(\"Original FPS:\", fps)\n",
+        "\n",
+        "    # -------- SLOW MOTION --------\n",
+        "    print(\"Playing video in Slow Motion...\")\n",
+        "\n",
+        "    while True:\n",
+        "        ret, frame = cap.read()\n",
+        "\n",
+        "        if not ret:\n",
+        "            break\n",
+        "\n",
+        "        # Convert BGR to RGB\n",
+        "        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)\n",
+        "\n",
+        "        # Display frame\n",
+        "        display(Image.fromarray(frame_rgb))\n",
+        "\n",
+        "        # Delay increased for slow motion\n",
+        "        time.sleep(0.10)\n",
+        "\n",
+        "        clear_output(wait=True)\n",
+        "\n",
+        "    cap.release()\n",
+        "\n",
+        "print(\"Slow-motion playback completed.\")"
+      ]
+    }
+  ]
+}
