@@ -1,0 +1,102 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPfJ47vg+xPBavBWn4oeN2F",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/MalliChandana/ITA0517-ComputerVision/blob/main/LAB%20EXPERIMENTS/exp33\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 329
+        },
+        "id": "QYGyUx-knmMf",
+        "outputId": "c9d114a0-e840-428c-ef8c-190d0a7c270e"
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "Enter image height: 123\n",
+            "Enter image width: 322\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<Figure size 800x600 with 1 Axes>"
+            ],
+            "image/png": "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\n"
+          },
+          "metadata": {}
+        }
+      ],
+      "source": [
+        "import cv2\n",
+        "import numpy as np\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "# Function to create a white image and draw a rectangle\n",
+        "def create_rectangle_image(height, width):\n",
+        "\n",
+        "    # Create a white image\n",
+        "    image = np.ones((height, width, 3), dtype=np.uint8) * 255\n",
+        "\n",
+        "    # Define rectangle coordinates\n",
+        "    start_point = (50, 50)\n",
+        "    end_point = (width - 50, height - 50)\n",
+        "\n",
+        "    # Draw rectangle\n",
+        "    # (0, 0, 0) = Black color\n",
+        "    # 3 = Thickness\n",
+        "    cv2.rectangle(image, start_point, end_point, (0, 0, 0), 3)\n",
+        "\n",
+        "    return image\n",
+        "\n",
+        "\n",
+        "# Get image size from user\n",
+        "height = int(input(\"Enter image height: \"))\n",
+        "width = int(input(\"Enter image width: \"))\n",
+        "\n",
+        "# Create image with rectangle\n",
+        "image = create_rectangle_image(height, width)\n",
+        "\n",
+        "# Convert BGR to RGB for displaying with Matplotlib\n",
+        "image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)\n",
+        "\n",
+        "# Display the image\n",
+        "plt.figure(figsize=(8, 6))\n",
+        "plt.imshow(image_rgb)\n",
+        "plt.title(\"Rectangle using OpenCV\")\n",
+        "plt.axis(\"off\")\n",
+        "plt.show()"
+      ]
+    }
+  ]
+}
