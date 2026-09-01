@@ -1,0 +1,106 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOQnwgUlu9T3izzPqp3la6M",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/MalliChandana/ITA0517-ComputerVision/blob/main/LAB%20EXPERIMENTS/exp32\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 327
+        },
+        "id": "3jLxRZ6WnHah",
+        "outputId": "c31945b0-08d9-44ed-92bd-9b47371d4e7b"
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "Enter image height: 123\n",
+            "Enter image width: 324\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<Figure size 800x800 with 1 Axes>"
+            ],
+            "image/png": "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Q0Pldrt19OhRpaWlqaioSPfee6+6dOmi7OxsZWVl6cCBAz7hVR9lZWW67rrrlJycrOeff17NmjWrcd33339fXbt2rfN5rcOGDdO8efOUkZGhhx56SGvWrNGkSZP09ddfV3s+baX67uucOXN07NgxjRgxQm63WxdddJE2bdqkpKQkdejQQWPGjJHX69WCBQt04403atGiRc6pHD/++KOuvfZalZWVOevNmjWr3m+979u3T9LJP1SKi4s1fvx4eTweDRo0qF771bZtW7366qvKzMzU1KlTNWrUKFVUVCgrK0uhoaGaPn26s50//elPysvL04gRIxQTE6MNGzbopZde0tatW/Xuu+9KOhm36enpuuKKK/TUU0/J7XarqKhI+fn59do/4LwxQCOzadMmI8mMHz/eGGPMr7/+arxer5k3b54xxph27dqZV155xRhjzKFDh0xgYKAZPny4z2NIMkFBQaaoqMgZKygoMJLM1KlTnbE5c+YYSWb79u3OWGxsrElNTfWb1/jx443X6zVbt271GR8zZowJDAw0u3btqnW/UlNTTWxsrN883W63z/ZnzpxpJJn27dubQ4cOOeNjx471m+svv/zit51JkyYZl8tldu7c6YzFx8ebjh07msOHDztjK1euNJJMRESEM5abm2skmfnz5/s85tKlS6sdP1VsbKwZNGiQc/vKK680mZmZRpL5+uuvjTHGvP3220aSKSgocNaLiIgwQ4cOdW5nZ2cbSWbFihV+24iIiDCSTE5OjjNWUlJi3G63eeihh2qdnzEnn/PqvubMmWOMMWby5MlGkvn3v//t3OfEiROmZ8+eJiQkxHlNVqxYUe0ct2/f7vN4xhgzdOhQI8mMGTPmtPM7ePCgkWQGDBhw2nWNMearr74yksywYcN8xh9++GEjySxfvtwZS01N9fneruu+Vu5T8+bNTUlJic92+vTpY+Lj482xY8ecsYqKCpOYmGguvfRSZ+yBBx4wksyaNWucsZKSEtOiRQu/7+vqPP7449W+bi1btjRLly71Wbeu+2WMMbfccotp1qyZ2bp1q3nuueeMJPPuu+86y998800TEBBgcnNzfbYxY8YMI8nk5+cbY4x56aWXjCSzd+/eWvcDaCx4CxiNTkxMjC6++GLnqFFBQYGOHDniHA1JTEx0/qpevXq1ysvLqz3/r2/fvoqMjHRuX3HFFWrevLm+/fbbBs0rOztbKSkpatWqlX766Sfnq2/fviovL1dOTk6DHrdPnz4+b8Nec801kqSBAwcqNDTUb7zq/KsePTly5Ih++uknJSYmyhijdevWSZK+//57bdiwQUOGDFFISIizfmpqquLj4/32sUWLFurXr5/PPiYkJCgkJKTaT2BXlZKSotzcXEnS4cOHVVBQoBEjRqh169bOeG5urlq2bHlGn4i+/PLLlZKS4txu06aNLrvssjq/tgMGDNCyZct8vq677jpJ0ocffqj27dvrlltucdZv2rSpRo0apdLSUn322WcNnvddd9112nUOHTokST6vfW0+/PBDSdKDDz7oM/7QQw9JUq3nCtZ3XwcOHKg2bdo4t/ft26fly5dr0KBBOnz4sPP98vPPP+u6665TYWGhiouLnW39/ve/19VXX+3cv02bNrW+FV6dRYsWadmyZfr44481Z84cdevWTQMHDtSqVasatF/Tpk1TixYtlJGRoXHjxum2227TgAEDnOXZ2dmKiYlRdHS0z89E7969Jcn5mWjZsqUk6b333jvjt7WB84G3gNHouFwuJSYmKicnRxUVFcrPz1fbtm0VFRUl6WQATps2TZKcEKwuAMPDw/3GWrVqddpz2WpSWFio9evX+/wCrKqkpKRBj3vqPFu0aCFJ6tSpU7XjVee/a9cu/eMf/9DixYv99uvgwYOSpJ07d0qS8/xVFRUVpS+//NK5XVhYqIMHD6pt27bVzvV0+5iSkqIZM2aoqKhI27Ztk8vlUs+ePZ0wHD58uHJzc5WUlOTzqd/6OtPXtmPHjurbt2+1y3bu3KlLL73Ub36Vb0FXPp/11aRJE3Xs2PG06zVv3lzSyYCui507dyogIMDv9W3fvr1atmxZ63zru69dunTxuV1UVCRjjMaNG6dx48ZVu42SkhJ16NBBO3fudP6Iqeqyyy6reeeq0atXL58PgWRkZOjSSy/Vfffdpy+++KLe+3XRRRdpypQpyszMVLt27TRlyhSf+xQWFurrr78+7c/94MGDNXv2bA0bNkxjxoxRnz59dNNNNykjI+OMvteBc4UARKOUnJys999/Xxs2bHDO/6uUmJioRx55RMXFxcrLy1NYWJi6du3q9xg1fbrXVDnhuz4qKirUr18/jR49utrl3bp1a9Dj1jTP082/vLxc/fr10759+/T3v/9d0dHR8nq9Ki4uVlZWVoOOQlRUVKht27aaP39+tctr+iVYqTLEc3Jy9O233+rKK6+U1+tVSkqKpkyZotLSUq1bt07//Oc/6z23qs72a9sQLper2vHy8vJqx91ud51CoHnz5goLC9PGjRvPynzOplPP16v8Hnv44YedI6inqu4Pj7MpJCRE11xzjd57771aP1ldm48++kjSyT+uvvvuO+donnRyH+Pj4/Xiiy9We9/KP9SCg4OVk5OjFStWaMmSJVq6dKneeust9e7dWx9//DFXG0CjQwCiUap6PcD8/Hw98MADzrKEhAS53W6tXLlSa9as0Q033HBWt13TL9LIyEiVlpbWeOTofNuwYYO2bt2qefPm+VzTbtmyZT7rRURESDp5tOZUp45FRkbqk08+UVJSUoOuixceHq7w8HDl5ubq22+/dd6m7dWrlx588EFlZ2ervLxcvXr1qvVxzkfM1CQiIkLr169XRUWFT7Bt2bLFWS6dPOIonfxkeFUNPUJYVXp6umbNmqXVq1erZ8+ep51vRUWFCgsLfT4os2fPHh04cMCZb033rcu+1qTyD6+mTZue9uciIiJChYWFfuPffPNNrferi7KyMklSaWmpvF5vvfZr6dKlmj17tkaPHq358+dr6NChWrNmjfOp4sjISBUUFKhPnz6n/b4MCAhQnz591KdPH7344ouaOHGiHnvsMa1YsaLR/H8DqMRxaTRKV111lTwej+bPn6/i4mKfI4But1tXXnmlXnnlFR05cqRB1/+rjdfr9fulLkmDBg3S6tWrnaMFVR04cMD5JXS+VB5RqHrUyxijl19+2We9sLAwxcXF6Y033lBpaakz/tlnnzmXm6k0aNAglZeXa/z48X7bKysrq/Z5OVVKSoqWL1+utWvXOgHYo0cPhYaG6umnn1ZwcLASEhJqfYzKozh12d7ZdsMNN+jHH3/UW2+95YyVlZVp6tSpCgkJUWpqqqSTEREYGOh37mflp0fPxOjRo+X1ejVs2DDt2bPHb/m2bduc17nyD6BTP4VeecSqf//+NW6nrvtak7Zt2yotLU0zZ87UDz/84Ld87969Ptv6/PPPtXbtWp/lNR1trqt9+/Zp1apVat++vXPqQl3368CBAxo2bJiuvvpqTZw4UbNnz9aXX36piRMnOvcbNGiQiouL9dprr/lt++jRozpy5Igzj1NVXpewLpfjAc43jgCiUQoK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\n"
+          },
+          "metadata": {}
+        }
+      ],
+      "source": [
+        "import numpy as np\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "# Function to create the image\n",
+        "def create_image(height, width):\n",
+        "\n",
+        "    # Create a white image\n",
+        "    # 3 represents RGB color channels\n",
+        "    image = np.ones((height, width, 3), dtype=np.uint8) * 255\n",
+        "\n",
+        "    # Box size = 1/10th of image dimensions\n",
+        "    box_height = height // 10\n",
+        "    box_width = width // 10\n",
+        "\n",
+        "    # Black box - Top Left\n",
+        "    image[0:box_height, 0:box_width] = [0, 0, 0]\n",
+        "\n",
+        "    # Blue box - Top Right\n",
+        "    image[0:box_height, width-box_width:width] = [0, 0, 255]\n",
+        "\n",
+        "    # Green box - Bottom Left\n",
+        "    image[height-box_height:height, 0:box_width] = [0, 255, 0]\n",
+        "\n",
+        "    # Red box - Bottom Right\n",
+        "    image[height-box_height:height, width-box_width:width] = [255, 0, 0]\n",
+        "\n",
+        "    return image\n",
+        "\n",
+        "\n",
+        "# Get image size from user\n",
+        "height = int(input(\"Enter image height: \"))\n",
+        "width = int(input(\"Enter image width: \"))\n",
+        "\n",
+        "# Create the image\n",
+        "image = create_image(height, width)\n",
+        "\n",
+        "# Display the image\n",
+        "plt.figure(figsize=(8, 8))\n",
+        "plt.imshow(image)\n",
+        "plt.title(\"White Image with Four Colored Boxes\")\n",
+        "plt.axis(\"off\")\n",
+        "plt.show()"
+      ]
+    }
+  ]
+}
